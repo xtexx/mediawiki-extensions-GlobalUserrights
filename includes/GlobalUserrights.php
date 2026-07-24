@@ -67,12 +67,7 @@ class GlobalUserrights extends SpecialUserRights {
 	function doSaveUserGroups( $user, array $add, array $remove, $reason = '',
 		array $tags = [], array $groupExpiries = []
 	) {
-		if ( method_exists( MediaWikiServices::class, 'getCentralIdLookupFactory' ) ) {
-			// MW1.37+
-			$uidLookup = MediaWikiServices::getInstance()->getCentralIdLookupFactory()->getLookup();
-		} else {
-			$uidLookup = CentralIdLookup::factory();
-		}
+		$uidLookup = MediaWikiServices::getInstance()->getCentralIdLookupFactory()->getLookup();
 
 		$uid = $uidLookup->centralIdFromLocalUser( $user );
 

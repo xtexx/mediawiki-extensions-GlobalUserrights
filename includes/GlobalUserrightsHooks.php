@@ -24,13 +24,7 @@ class GlobalUserrightsHooks {
 	public static function getGroupMemberships( $user ) {
 		if ( $user instanceof UserIdentity ) {
 			if ( $user->isRegistered() ) {
-				if ( method_exists( MediaWikiServices::class, 'getCentralIdLookupFactory' ) ) {
-					// MW1.37+
-					$uidLookup = MediaWikiServices::getInstance()->getCentralIdLookupFactory()->getLookup();
-				} else {
-					$uidLookup = CentralIdLookup::factory();
-				}
-
+				$uidLookup = MediaWikiServices::getInstance()->getCentralIdLookupFactory()->getLookup();
 				$uid = $uidLookup->centralIdFromLocalUser( $user );
 			} else {
 				// Anonymous users cannot have any user group.
